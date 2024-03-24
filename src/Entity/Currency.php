@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\OpenApi\Model;
+use ApiPlatform\Metadata\Get;
 use App\Controller\NbpController;
+use App\State\CurrencyProvider;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidType;
 use Ramsey\Uuid\Uuid;
@@ -15,10 +15,10 @@ use Ramsey\Uuid\Uuid;
  */
 #[ApiResource(operations: [
     new Get(
-        uriTemplate: '/user/users',
+        uriTemplate: '/currency',
         controller: NbpController::class,
-        name: 'users'
-    ),
+        name: 'api_currencycurrency'
+    )
 ])]
 class Currency
 {

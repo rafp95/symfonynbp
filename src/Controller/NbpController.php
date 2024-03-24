@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use ApiPlatform\Metadata\Get;
 use App\NBP\SdkInterface\INbpSdk;
 use App\Repository\ICurrencyRepository;
 use App\utils\ResponseHandler;
@@ -11,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[AsController]
-#[Route('/api', name: 'api')]
+#[Route('/api', name: 'api_currency')]
 class NbpController extends AbstractController
 {
 
@@ -19,7 +18,7 @@ class NbpController extends AbstractController
     {
     }
 
-    #[Route('/currency', name: 'currency')]
+    #[Route('/currency', name: 'currency', methods: ['GET'])]
     public function currency(): JsonResponse
     {
        return ResponseHandler::getJsonData($this->currencyRepository->createCurrency($this->ISdk->getCurrency()));
