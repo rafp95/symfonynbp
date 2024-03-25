@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Currency;
 use App\NBP\DTO\CurrencyDTO;
 
 interface ICurrencyRepository
@@ -12,5 +13,5 @@ interface ICurrencyRepository
      */
     public function createCurrency(array $currency): ?array;
     public function flush(): void;
-    public function findByCodeAndMid(string $code, string $mid);
+    public function findByCode(string $code): ?Currency;
 }

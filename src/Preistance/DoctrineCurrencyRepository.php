@@ -19,11 +19,12 @@ class DoctrineCurrencyRepository implements ICurrencyRepository
     {
         foreach ($rates as $rate){
             $rate = new CurrencyDTO((array)$rate);
-            $exist = $this->findByCodeAndMid($rate->code,$rate->mid);
+            $exist = $this->findByCode($rate->code);
             $currency = new Currency($rate->currency,$rate->code,$rate->mid);
 
             if($exist){
-               $currency = $exist;
+                $exist->setMid($currency->getMid());
+                $currency = $exist;
             }
             $this->entityManager->persist($currency);
         }
@@ -38,15 +39,13 @@ class DoctrineCurrencyRepository implements ICurrencyRepository
        $this->entityManager->flush();
     }
 
-    public function findByCodeAndMid(string $code, string $mid)
+    public function findByCode(string $code): ?Currency
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
 
         $queryBuilder
             ->select('c')
             ->from('App\Entity\Currency', 'c')
-            ->andWhere('c.mid = :mid')
-            ->setParameter('mid', $mid)
             ->andWhere('c.code = :code')
             ->setParameter('code', $code);
 
