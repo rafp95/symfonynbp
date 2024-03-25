@@ -20,11 +20,15 @@ class DoctrineCurrencyRepository implements ICurrencyRepository
         foreach ($rates as $rate){
             $rate = new CurrencyDTO((array)$rate);
             $exist = $this->findByCode($rate->code);
-            $currency = new Currency($rate->currency,$rate->code,$rate->mid);
 
+            if(!empty($exist) && $rate->code === $exist->getCode() && $rate->mid === $exist->getMid())continue;
+
+            $currency = null;
             if($exist){
-                $exist->setMid($currency->getMid());
+                $exist->setMid($rate->mid);
                 $currency = $exist;
+            }else{
+                $currency = new Currency($rate->currency,$rate->code,$rate->mid);
             }
             $this->entityManager->persist($currency);
         }
