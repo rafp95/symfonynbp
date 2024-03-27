@@ -49,7 +49,7 @@ class DoctrineCurrencyRepository implements ICurrencyRepository
 
         $queryBuilder
             ->select('c')
-            ->from('App\Entity\Currency', 'c')
+            ->from(Currency::class, 'c')
             ->andWhere('c.code = :code')
             ->setParameter('code', $code);
 

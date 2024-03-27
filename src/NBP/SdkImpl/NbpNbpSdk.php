@@ -4,7 +4,6 @@ namespace App\NBP\SdkImpl;
 
 use App\NBP\DTO\CurrencyDTO;
 use App\NBP\SdkInterface\INbpSdk;
-use Decimal\Decimal;
 use GuzzleHttp\Client;
 use mysql_xdevapi\Exception;
 use Psr\Log\LoggerInterface;
