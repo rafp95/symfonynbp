@@ -14,4 +14,5 @@ interface ICurrencyRepository
     public function createCurrency(array $currency): ?array;
     public function flush(): void;
     public function findByCode(string $code): ?Currency;
+    public function getRates(): array;
 }

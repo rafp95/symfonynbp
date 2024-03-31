@@ -35,7 +35,7 @@ class DoctrineCurrencyRepository implements ICurrencyRepository
 
         $this->flush();
 
-        return  $rates;
+        return $this->getRates();
     }
 
     public function flush(): void
@@ -60,5 +60,17 @@ class DoctrineCurrencyRepository implements ICurrencyRepository
         }
 
         return $result;
+    }
+
+    public function getRates(): array
+    {
+        $result = $this->entityManager->getRepository(Currency::class)->findAll();
+        if(empty($result)){
+            return [];
+        }
+
+        return array_map(function ($item){
+            return new \App\Entity\DTO\CurrencyDTO($item->getId(),$item->getCurrency(),$item->getCode(),$item->getMid());
+        },$result);
     }
 }
