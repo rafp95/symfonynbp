@@ -7,6 +7,7 @@ use App\NBP\DTO\CurrencyDTO;
 use App\NBP\SdkInterface\INbpSdk;
 use App\Repository\ICurrencyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 
 
 class DoctrineCurrencyRepository implements ICurrencyRepository
@@ -15,6 +16,9 @@ class DoctrineCurrencyRepository implements ICurrencyRepository
     public function __construct(private EntityManagerInterface $entityManager, private INbpSdk $INbpSdk)    {
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     public function createCurrency(array $rates): ?array
     {
         foreach ($rates as $rate){
@@ -43,6 +47,9 @@ class DoctrineCurrencyRepository implements ICurrencyRepository
        $this->entityManager->flush();
     }
 
+    /**
+     * @throws NonUniqueResultException
+     */
     public function findByCode(string $code): ?Currency
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
