@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\NbpSdk;
+namespace App\Infrastructure\NbpSdk;
 
-use App\Application\NbpSdk\DTO\CurrencyDTO;
+use App\Infrastructure\NbpSdk\DTO\CurrencyDTO;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Log\LoggerInterface;

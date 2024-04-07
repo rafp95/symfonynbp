@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Domain\Currency;
+
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use App\State\CurrencyProvider;
 use App\UI\Controller\NbpController;
 use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Table;
 
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="currency")
- */
+#[ORM\Entity]
+#[ORM\Table(name: "currency")]
 #[ApiResource(operations: [
     new Get(
         uriTemplate: '/currency',
@@ -22,33 +23,20 @@ use Doctrine\ORM\Mapping as ORM;
 ])]
 class Currency
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true, nullable=false)
-     * @ORM\GeneratedValue(strategy="NONE")
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: "uuid", unique: true, nullable: false)]
+    #[ORM\GeneratedValue(strategy: "NONE")]
     private ?string $id;
 
-    /**
-     * @ORM\Column(type="string", length=500)
-     */
+    #[ORM\Column(type: "string", length: 500)]
     private string $currency;
 
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
+    #[ORM\Column(type: "string", length: 20)]
     private string $code;
 
-    /**
-     * @ORM\Column(type="decimal",precision=10, scale=2)
-     */
+    #[ORM\Column(type: "decimal", precision: 10, scale: 2)]
     private string $mid;
 
-    /**
-     * @param string $currency
-     * @param string $code
-     * @param string $mid
-     */
     public function __construct(string $currency, string $code, string $mid)
     {
         $this->id = Uuid::uuid4();

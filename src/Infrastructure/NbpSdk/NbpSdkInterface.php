@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\NbpSdk;
+namespace App\Infrastructure\NbpSdk;
 
 interface NbpSdkInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\NbpSdk\DTO;
+namespace App\Infrastructure\NbpSdk\DTO;
 
 class CurrencyDTO
 {
