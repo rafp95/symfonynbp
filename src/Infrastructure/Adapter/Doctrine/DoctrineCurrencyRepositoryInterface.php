@@ -2,7 +2,6 @@
 
 namespace App\Infrastructure\Adapter\Doctrine;
 
-use App\Application\NBP\DTO\CurrencyDTO;
 use App\Domain\Currency\Currency;
 use App\Domain\Currency\Repository\CurrencyRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;

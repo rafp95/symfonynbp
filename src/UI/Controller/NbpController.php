@@ -6,11 +6,10 @@ use App\Application\Command\CreateCurrencyCommand;
 use App\Application\Command\CreateCurrencyCommandHandler;
 use App\Application\Query\GetAllCurrencyQuery;
 use App\Application\Query\GetAllCurrencyQueryHandler;
-use App\Application\Service\CurrencyService;
-use App\Controller\AsController;
 use App\Infrastructure\NbpSdk\NbpSdkInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[AsController]

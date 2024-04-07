@@ -4,7 +4,6 @@ namespace App\Domain\Currency;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use App\State\CurrencyProvider;
 use App\UI\Controller\NbpController;
 use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
