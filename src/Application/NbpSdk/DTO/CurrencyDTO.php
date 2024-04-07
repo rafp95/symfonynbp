@@ -1,7 +1,6 @@
 <?php
 
-namespace App\NBP\DTO;
-use Decimal\Decimal;
+namespace App\Application\NbpSdk\DTO;
 
 class CurrencyDTO
 {

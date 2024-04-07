@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Currency;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use App\Controller\NbpController;
 use App\State\CurrencyProvider;
-use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidType;
+use App\UI\Controller\NbpController;
 use Ramsey\Uuid\Uuid;
+use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * @ORM\Entity
@@ -27,7 +27,7 @@ class Currency
      * @ORM\Column(type="uuid", unique=true, nullable=false)
      * @ORM\GeneratedValue(strategy="NONE")
      */
-    private string $id;
+    private ?string $id;
 
     /**
      * @ORM\Column(type="string", length=500)
@@ -62,11 +62,6 @@ class Currency
         return $this->id;
     }
 
-    public function setId(string $id): void
-    {
-        $this->id = $id;
-    }
-
     public function getCurrency(): string
     {
         return $this->currency;
@@ -96,6 +91,5 @@ class Currency
     {
         $this->mid = $mid;
     }
-
 
 }

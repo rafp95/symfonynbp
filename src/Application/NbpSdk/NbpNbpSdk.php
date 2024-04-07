@@ -1,15 +1,13 @@
 <?php
 
-namespace App\NBP\SdkImpl;
+namespace App\Application\NbpSdk;
 
-use App\NBP\DTO\CurrencyDTO;
-use App\NBP\SdkInterface\INbpSdk;
+use App\Application\NbpSdk\DTO\CurrencyDTO;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use mysql_xdevapi\Exception;
 use Psr\Log\LoggerInterface;
 
-class NbpNbpSdk implements INbpSdk
+class NbpNbpSdk implements NbpSdkInterface
 {
     public function __construct(private LoggerInterface $logger)
     {
