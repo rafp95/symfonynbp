@@ -24,10 +24,7 @@ class CreateCurrencyCommandHandler
              */
             $existCurrency = $this->currencyRepository->findByCode($value->code);
 
-            if(
-                $value->code == $existCurrency?->getCode() &&
-                $value->mid == $existCurrency?->getMid()
-            )continue;
+            if($value->code == $existCurrency?->getCode() && $value->mid == $existCurrency?->getMid())continue;
 
             if(empty($existCurrency)){
                 $currency[] = new Currency($value->currency,$value->code,$value->mid);
