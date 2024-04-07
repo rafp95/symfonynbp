@@ -26,7 +26,7 @@ class NbpNbpSdk implements NbpSdkInterface
                return new CurrencyDTO($rate);
            },$rates);
        }catch (GuzzleException $e) {
-           $this->logger->log($e->getMessage());
+           $this->logger->error($e->getMessage());
        }
 
         return [];
