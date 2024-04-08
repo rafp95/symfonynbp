@@ -9,6 +9,7 @@ use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
+use Ramsey\Uuid\UuidInterface;
 
 
 #[ORM\Entity]
@@ -25,7 +26,7 @@ class Currency
     #[ORM\Id]
     #[ORM\Column(type: "uuid", unique: true, nullable: false)]
     #[ORM\GeneratedValue(strategy: "NONE")]
-    private ?string $id;
+    private ?UuidInterface $id;
 
     #[ORM\Column(type: "string", length: 500)]
     private string $currency;
