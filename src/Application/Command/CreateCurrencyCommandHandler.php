@@ -2,40 +2,20 @@
 
 namespace App\Application\Command;
 
+use App\Application\Service\CurrencyService;
 use App\Domain\Currency\Currency;
 use App\Domain\Currency\DTO\CurrencyDTO;
 use App\Domain\Currency\Repository\CurrencyRepositoryInterface;
 
 class CreateCurrencyCommandHandler
 {
-    public function __construct(private CurrencyRepositoryInterface $currencyRepository)
+    public function __construct(private CurrencyService $currencyService)
     {
     }
 
-    public function createCurrency(CreateCurrencyCommand $command): void
+    public function __invoke(CreateCurrencyCommand $command): void
     {
-        $currency = [];
-        /**
-         * @var $value CurrencyDTO
-         */
-        foreach ($command->getRates() as $value){
-            /**
-             * @var $exist Currency
-             */
-            $existCurrency = $this->currencyRepository->findByCode($value->code);
-
-            if($value->code == $existCurrency?->getCode() && $value->mid == $existCurrency?->getMid())continue;
-
-            if(empty($existCurrency)){
-                $currency[] = new Currency($value->currency,$value->code,$value->mid);
-            }else{
-                $existCurrency->setMid($value->mid);
-                $currency[] = $existCurrency;
-            }
-
-        }
-
-        $this->currencyRepository->createCurrency($currency);
-
+        $this->currencyService->createCurrency($command);
     }
+
 }

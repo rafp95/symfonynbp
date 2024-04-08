@@ -6,6 +6,8 @@ use App\Application\Command\CreateCurrencyCommand;
 use App\Application\Command\CreateCurrencyCommandHandler;
 use App\Application\Query\GetAllCurrencyQuery;
 use App\Application\Query\GetAllCurrencyQueryHandler;
+use App\Infrastructure\Bus\CommandBus;
+use App\Infrastructure\Bus\CommandBusInterface;
 use App\Infrastructure\NbpSdk\NbpSdkInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,8 +21,9 @@ class NbpController extends AbstractController
 
     public function __construct(
         private NbpSdkInterface $nbpSdk,
-        private CreateCurrencyCommandHandler $createCurrencyCommandHandler,
+        private CommandBusInterface $commandBus,
         private GetAllCurrencyQueryHandler $allCurrencyQueryHandler,
+        private CreateCurrencyCommandHandler $createCurrencyCommandHandler,
     )
     {
     }
@@ -28,8 +31,9 @@ class NbpController extends AbstractController
     #[Route('/currency', name: 'currency', methods: ['GET'])]
     public function currency(): JsonResponse
     {
-        $query = new CreateCurrencyCommand($this->nbpSdk->getCurrency());
-        $this->createCurrencyCommandHandler->createCurrency($query);
+        $command = new CreateCurrencyCommand($this->nbpSdk->getCurrency());
+        $this->commandBus->registerHandler(CreateCurrencyCommand::class, $this->createCurrencyCommandHandler);
+        $this->commandBus->handle($command);
         $rates = $this->allCurrencyQueryHandler->getRates(new GetAllCurrencyQuery());
         return new JsonResponse($rates, 200);
     }

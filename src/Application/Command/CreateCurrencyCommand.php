@@ -2,7 +2,7 @@
 
 namespace App\Application\Command;
 
-class CreateCurrencyCommand
+class CreateCurrencyCommand implements CommandInterface
 {
     public function __construct(private ?array $rates)
     {
