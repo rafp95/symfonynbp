@@ -7,7 +7,7 @@ use App\Domain\Currency\Currency;
 use App\Domain\Currency\DTO\CurrencyDTO;
 use App\Domain\Currency\Repository\CurrencyRepositoryInterface;
 
-class CurrencyService
+class CurrencyService implements CurrencyServiceInterface
 {
     public function __construct(private CurrencyRepositoryInterface $currencyRepository)
     {
