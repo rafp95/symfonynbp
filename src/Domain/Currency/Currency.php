@@ -29,7 +29,7 @@ class Currency
     private ?UuidInterface $id;
 
     #[ORM\Column(type: "string", length: 500)]
-    private string $currency;
+    private string $currency fdsfdsf;
 
     #[ORM\Column(type: "string", length: 20)]
     private string $code;
