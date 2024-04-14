@@ -35,7 +35,7 @@ class NbpController extends AbstractController
         $this->commandBus->registerHandler(CreateCurrencyCommand::class, $this->createCurrencyCommandHandler);
         $this->commandBus->handle($command);
         $rates = $this->allCurrencyQueryHandler->getRates(new GetAllCurrencyQuery());
-        return $this->nbpResponse::successResponse($rates);
+        return $this->nbpResponse->successResponse($rates);
     }
 
 }
