@@ -4,11 +4,9 @@ namespace App\Domain\Currency;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
-use App\UI\Controller\NbpController;
-use Ramsey\Uuid\Uuid;
+use App\UI\Controller\Nbp\NbpController;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Table;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 

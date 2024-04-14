@@ -1,12 +1,11 @@
 <?php
 
-namespace App\UI\Controller;
+namespace App\UI\Controller\Nbp;
 
 use App\Application\Command\CreateCurrencyCommand;
 use App\Application\Command\CreateCurrencyCommandHandler;
 use App\Application\Query\GetAllCurrencyQuery;
 use App\Application\Query\GetAllCurrencyQueryHandler;
-use App\Infrastructure\Bus\CommandBus;
 use App\Infrastructure\Bus\CommandBusInterface;
 use App\Infrastructure\NbpSdk\NbpSdkInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +23,7 @@ class NbpController extends AbstractController
         private CommandBusInterface $commandBus,
         private GetAllCurrencyQueryHandler $allCurrencyQueryHandler,
         private CreateCurrencyCommandHandler $createCurrencyCommandHandler,
+        private NbpResponseInterface $nbpResponse
     )
     {
     }
@@ -35,7 +35,7 @@ class NbpController extends AbstractController
         $this->commandBus->registerHandler(CreateCurrencyCommand::class, $this->createCurrencyCommandHandler);
         $this->commandBus->handle($command);
         $rates = $this->allCurrencyQueryHandler->getRates(new GetAllCurrencyQuery());
-        return new JsonResponse($rates, 200);
+        return $this->nbpResponse::successResponse($rates);
     }
 
 }
