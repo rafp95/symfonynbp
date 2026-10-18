@@ -4,27 +4,31 @@ namespace App\Infrastructure\Adapter\Doctrine;
 
 use App\Domain\Currency\Currency;
 use App\Domain\Currency\Repository\CurrencyRepositoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-
-class DoctrineCurrencyRepositoryInterface implements CurrencyRepositoryInterface
+class DoctrineCurrencyRepositoryInterface extends ServiceEntityRepository implements CurrencyRepositoryInterface
 {
 
-    public function __construct(private EntityManagerInterface $entityManager)    {
+    public function __construct(private readonly ManagerRegistry $registry)    {
+        parent::__construct($this->registry, Currency::class);
     }
 
     public function createCurrency(array $currency): void
     {
+        /**
+         * @var $value ?Currency
+         */
         foreach ($currency as $value){
-            $this->entityManager->persist($value);
+            $this->getEntityManager()->persist($value);
         }
         $this->flush();
     }
 
     public function flush(): void
     {
-       $this->entityManager->flush();
+       $this->getEntityManager()->flush();
     }
 
     /**
@@ -32,7 +36,7 @@ class DoctrineCurrencyRepositoryInterface implements CurrencyRepositoryInterface
      */
     public function findByCode(string $code): ?Currency
     {
-        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
 
         $queryBuilder
             ->select('c')
@@ -51,7 +55,7 @@ class DoctrineCurrencyRepositoryInterface implements CurrencyRepositoryInterface
 
     public function getRates(): array
     {
-        $result = $this->entityManager->getRepository(Currency::class)->findAll();
+        $result = $this->findAll();
         if(empty($result)){
             return [];
         }
